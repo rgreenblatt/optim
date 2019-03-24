@@ -27,7 +27,7 @@ class Adam(Optimizer):
     """
 
     def __init__(self, params, lr=1e-3, betas=(0.9, 0.999), eps=1e-8,
-                 weight_decay=0, amsgrad=False):
+                 weight_decay=0, amsgrad=False, initial_step_number=0):
         if (not callable(lr)) and (not 0.0 <= lr):
             raise ValueError("Invalid learning rate: {}".format(lr))
         if (not callable(eps)) and (not 0.0 <= eps):
@@ -38,7 +38,7 @@ class Adam(Optimizer):
             raise ValueError("Invalid beta parameter at index 1: {}".format(betas[1]))
         defaults = dict(lr=lr, betas=betas, eps=eps, weight_decay=weight_decay, amsgrad=amsgrad)
         super(Adam, self).__init__(params, defaults)
-        self.step_number=0
+        self.step_number=initial_step_number
 
     def __setstate__(self, state):
         super(Adam, self).__setstate__(state)
